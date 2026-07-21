@@ -853,6 +853,10 @@ def upload_image():
         product_image = recommendation['image']
 
    # SAVE HISTORY
+print(type(brightness), brightness)
+print(type(redness), redness)
+print(type(texture), texture)
+
 cur.execute("""
     INSERT INTO analysis_history
     (
