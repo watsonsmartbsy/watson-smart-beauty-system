@@ -752,6 +752,8 @@ def upload_image():
 
     # ANALYZE IMAGE
     result = analyze_skin(filepath)
+    print(result)
+    print(type(result))
 
     # Convert NumPy values to normal Python floats
     brightness = float(result['brightness'])
