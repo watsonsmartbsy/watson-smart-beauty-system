@@ -3,7 +3,6 @@
 # Brightness + Redness + Texture
 # ==========================================
 
-
 def skin_condition(
     brightness,
     redness,
@@ -11,18 +10,18 @@ def skin_condition(
     conn
 ):
 
+    cur = conn.cursor()
 
-    rules = conn.execute(
-        """
+    cur.execute("""
         SELECT *
         FROM rules
-        """
-    ).fetchall()
+    """)
 
+    rules = cur.fetchall()
 
+    cur.close()
 
     for rule in rules:
-
 
         if (
 
@@ -32,49 +31,35 @@ def skin_condition(
 
             brightness <= rule['max_brightness']
 
-
             and
-
 
             redness >= rule['min_redness']
 
-
             and
-
 
             redness <= rule['max_redness']
 
-
             and
 
-
-           texture >= (rule['min_texture'] or 0)
+            texture >= (rule['min_texture'] or 0)
 
             and
 
             texture <= (rule['max_texture'] or 999)
+
         ):
-
-
 
             if redness >= 180:
 
-
                 severity = "High"
-
 
             elif redness >= 120:
 
-
                 severity = "Medium"
-
 
             else:
 
-
                 severity = "Low"
-
-
 
             return {
 
@@ -86,15 +71,9 @@ def skin_condition(
 
             }
 
-
-
-
-
     # BACKUP RULE IF NO DATABASE MATCH
 
-
     if redness >= 150 and texture >= 100:
-
 
         return {
 
@@ -106,12 +85,7 @@ def skin_condition(
 
         }
 
-
-
-
-
     elif texture >= 150:
-
 
         return {
 
@@ -123,12 +97,7 @@ def skin_condition(
 
         }
 
-
-
-
-
     elif redness >= 120:
-
 
         return {
 
@@ -140,12 +109,7 @@ def skin_condition(
 
         }
 
-
-
-
-
     elif brightness >= 180 and texture < 100:
-
 
         return {
 
@@ -157,12 +121,7 @@ def skin_condition(
 
         }
 
-
-
-
-
     else:
-
 
         return {
 
