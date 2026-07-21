@@ -870,7 +870,7 @@ def upload_image():
         (
             %s,%s,%s,%s,%s,%s,%s,%s,%s
         )
-    """,
+    """),
   (
     session['user_id'],
     filepath,
