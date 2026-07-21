@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Analysis Statistics Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="worker_dashboard">
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+
+    <div class="text-center mb-5">
+
+        <i class="fa-solid fa-chart-column fa-4x"
+           style="color:#009b9b;"></i>
+
+        <h1 class="fw-bold mt-3">
+
+            Analysis Statistics Dashboard
+
+        </h1>
+
+        <p class="text-muted">
+
+            Overview of customer skin analysis records.
+
+        </p>
+
+    </div>
+
+    <!-- TOTAL ANALYSIS -->
+
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-lg-5">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body text-center p-4">
+
+                    <i class="fa-solid fa-database fa-3x mb-3"
+                       style="color:#009b9b;"></i>
+
+                    <h1 class="display-4 fw-bold">
+
+                        {{ total }}
+
+                    </h1>
+
+                    <h4>
+
+                        Total Analyses
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Total customer skin analysis records.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PIE CHART -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-5">
+
+        <div class="card-header text-white"
+             style="background:#009b9b;">
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            Skin Condition Distribution
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <div style="width:450px;height:450px;margin:auto;">
+
+                <canvas id="conditionChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header text-white"
+             style="background:#009b9b;">
+
+            <i class="fa-solid fa-table"></i>
+
+            Skin Condition Summary
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead style="background:#eef9f9;">
+
+                        <tr>
+
+                            <th>Skin Condition</th>
+
+                            <th>Total Cases</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for item in conditions %}
+
+                        <tr>
+
+                            <td>
+
+                                <i class="fa-solid fa-circle"
+                                   style="color:#009b9b;"></i>
+
+                                {{ item['condition'] }}
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge rounded-pill px-3 py-2"
+                                      style="background:#009b9b;">
+
+                                    {{ item['total'] }}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <div class="text-center mt-5">
+
+        <a href="{{ url_for('worker') }}"
+           class="btn btn-watson btn-lg px-5">
+
+            <i class="fa-solid fa-house"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+ <script>
+
+const labels = JSON.parse('{{ chart_labels | tojson | safe }}');
+const values = JSON.parse('{{ chart_values | tojson | safe }}');
+
+const ctx = document.getElementById('conditionChart');
+
+new Chart(ctx, {
+
+    type: 'pie',
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+
+            data: values,
+
+            backgroundColor: labels.map((_, index) => {
+            const hue = (index * 360 / labels.length) % 360;
+            return `hsl(${hue}, 65%, 55%)`;
+            }),
+
+            borderColor: "#ffffff",
+            borderWidth: 2
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: true,
+
+        plugins: {
+
+            legend: {
+
+                position: 'bottom',
+
+                labels: {
+
+                    padding: 20,
+
+                    font: {
+                        size: 14
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

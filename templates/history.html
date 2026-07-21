@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Analysis History</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container mt-5">
+
+
+    <!-- TITLE -->
+
+   <div class="text-center mb-5">
+
+    <h1 class="fw-bold text-white">
+        <i class="fas fa-history"></i>
+        Analysis History
+    </h1>
+
+    <p class="text-white-50 fs-5">
+        View your previous skin analysis results and recommendations.
+    </p>
+
+</div>
+
+
+    {% if history %}
+
+
+    <div class="row">
+
+
+        {% for item in history %}
+
+
+        <div class="col-md-6 mb-4">
+
+
+            <div class="card history-card shadow">
+
+
+                <div class="card-body">
+
+
+                    <!-- HEADER -->
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+
+                        <p class="text-muted mb-2">
+
+                            Record #{{ loop.index }}
+
+                        </p>
+
+
+                        {% if item['condition'] == 'Acne / Skin Irritation' %}
+
+
+                        <span class="badge bg-danger condition-badge">
+
+                            {{ item['condition'] }}
+
+                        </span>
+
+
+                        {% elif item['condition'] == 'Dry Skin' %}
+
+
+                        <span class="badge bg-warning text-dark condition-badge">
+
+                            {{ item['condition'] }}
+
+                        </span>
+
+
+                        {% else %}
+
+
+                        <span class="badge bg-success condition-badge">
+
+                            {{ item['condition'] }}
+
+                        </span>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <h4 class="page-title mb-3">
+
+                        Analysis Record
+
+                    </h4>
+
+
+
+                    <p>
+
+                        <strong>Brightness:</strong>
+
+                        {{ item['brightness'] }}
+
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>Redness:</strong>
+
+                        {{ item['redness'] }}
+
+                    </p>
+
+                    <p>
+                        <strong>Texture Score</strong>
+                        
+                        {{ item['texture'] }}
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>Recommended Product:</strong>
+
+                        {{ item['product'] }}
+
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>Advice:</strong>
+
+                        {{ item['advice'] }}
+
+                    </p>
+
+
+                    <hr>
+
+
+                    <!-- BUTTON SECTION -->
+
+
+                    <div class="d-flex gap-2">
+
+
+                        <!-- VIEW DETAILS -->
+
+
+                        <a href="/history/view/{{ item['id'] }}"
+                           class="btn btn-success w-50">
+
+
+                            <i class="fa-solid fa-eye"></i>
+
+                            View
+
+
+                        </a>
+
+
+
+                        <!-- DELETE -->
+
+
+                        <a href="/history/delete/{{ item['id'] }}"
+                           class="btn btn-danger w-50"
+                           onclick="return confirm('Are you sure you want to delete this analysis?')">
+
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Delete
+
+
+                        </a>
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+    {% else %}
+
+
+    <div class="alert alert-info text-center">
+
+
+        No analysis history available.
+
+
+    </div>
+
+
+    {% endif %}
+
+
+
+
+    <!-- BACK BUTTON -->
+
+
+    <div class="text-center mt-4 mb-5">
+
+
+        <a href="/dashboard"
+           class="btn btn-watson">
+
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back Dashboard
+
+
+        </a>
+
+
+    </div>
+
+
+
+</div>
+
+
+</body>
+
+
+</html>

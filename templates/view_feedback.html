@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Customer Feedback</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body style="background:#38c0a4;">
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body p-5">
+
+                    <!-- Header -->
+                    <div class="text-center mb-5">
+
+                        <i class="fas fa-comments fa-4x text-info mb-3"></i>
+
+                        <h2 class="fw-bold">
+                            Customer Feedback
+                        </h2>
+
+                        <p class="text-muted">
+                            Review customer suggestions and complaints.
+                        </p>
+
+                    </div>
+
+                    <!-- Customer Information -->
+                    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+                        <div class="card-body">
+
+                            <h5 class="mb-4">
+                                <i class="fas fa-user text-info"></i>
+                                Customer Information
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <label class="text-muted">Full Name</label>
+
+                                    <div class="form-control bg-light">
+                                        {{ feedback['customer_name'] or 'N/A' }}
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label class="text-muted">Email Address</label>
+
+                                    <div class="form-control bg-light">
+                                        {{ feedback['customer_email'] or 'N/A' }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Complaint Details -->
+
+                    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+                        <div class="card-body">
+
+                            <h5 class="mb-4">
+                                <i class="fas fa-circle-info text-info"></i>
+                                Complaint Details
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="text-muted">Subject</label>
+
+                                    <div class="form-control bg-light">
+                                        {{ feedback['subject'] or 'N/A' }}
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="text-muted">Category</label>
+
+                                    <div class="form-control bg-light">
+                                        {{ feedback['category'] or 'N/A' }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="text-muted">Message</label>
+
+                                <div class="form-control bg-light" style="min-height:160px;">
+                                    {{ feedback['message'] or 'No message available.' }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Complaint Status -->
+
+                    <div class="card shadow-sm border-0 rounded-4">
+
+                        <div class="card-body text-center">
+
+                            <h5 class="mb-4">
+
+                                <i class="fas fa-clipboard-check text-info"></i>
+
+                                Complaint Status
+
+                            </h5>
+
+                            {% if feedback['status']=="Pending" %}
+
+                                <span class="badge bg-warning text-dark fs-6 px-4 py-3">
+                                    Pending
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-success fs-6 px-4 py-3">
+                                    Resolved
+                                </span>
+
+                            {% endif %}
+
+                            <div class="mt-5">
+
+                                {% if feedback['status']=="Pending" %}
+
+                                <a href="/worker/resolve_feedback/{{ feedback['id'] }}"
+                                   class="btn btn-success">
+
+                                    <i class="fas fa-check-circle"></i>
+
+                                    Mark as Resolved
+
+                                </a>
+
+                                {% endif %}
+
+                                <a href="/worker/feedback"
+                                   class="btn btn-secondary">
+
+                                    <i class="fas fa-arrow-left"></i>
+
+                                    Back
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Create Account</title>
+
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+    .register-card{
+        max-width:650px;
+        margin:auto;
+        margin-top:50px;
+        border:none;
+        border-radius:25px;
+    }
+
+    .logo{
+        width:180px;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card register-card shadow-lg p-5">
+
+    <div class="text-center mb-4">
+
+       <img
+    src="{{ url_for('static', filename='image/watson-logo.png') }}"
+    class="logo"
+    alt="Watsons Logo"
+>
+
+    </div>
+
+    <h2 class="text-center page-title mb-2">
+        Create Your Account
+    </h2>
+
+    <p class="text-center text-muted mb-4">
+        Join Watson Beauty Advisory System
+    </p>
+
+            {% if error %}
+
+        <div class="alert alert-danger text-center">
+
+        ❌ {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        {% if success %}
+
+        <div class="alert alert-success text-center">
+
+        ✅ {{ success }}
+
+        </div>
+
+        {% endif %}
+
+    <form method="POST" action="/register">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                class="form-control"
+                placeholder="Enter your full name"
+                required
+            >
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+            >
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Create a password"
+                required
+            >
+
+        </div>
+
+        <div class="mb-3">
+
+        <label class="form-label">
+
+        Confirm Password
+
+        </label>
+
+
+        <input
+        type="password"
+        name="confirm_password"
+        class="form-control"
+        required
+        >
+
+        </div>
+
+
+
+        <button
+            type="submit"
+            class="btn btn-watson w-100 py-2"
+        >
+            <i class="fa-solid fa-user-plus"></i>
+            Create Account
+        </button>
+
+    </form>
+
+    <div class="text-center mt-4">
+
+        <span class="text-muted">
+            Already have an account?
+        </span>
+
+        <a href="/" class="text-decoration-none">
+            Login Here
+        </a>
+
+    </div>
+
+</body>
+</html>

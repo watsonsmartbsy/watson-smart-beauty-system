@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Skin Analysis Result</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+body{
+
+    background:linear-gradient(135deg,#EAF9F8,#FFFFFF);
+
+    font-family:'Segoe UI',sans-serif;
+
+}
+
+
+
+.page-title{
+
+    color:#008C95;
+
+    font-size:48px;
+
+    font-weight:bold;
+
+}
+
+
+
+.sub-title{
+
+    color:#666;
+
+    font-size:18px;
+
+}
+
+
+
+.result-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+    padding:30px;
+
+}
+
+
+
+.analysis-image{
+
+    width:100%;
+
+    height:350px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    border:5px solid #009B9B;
+
+}
+
+
+
+.summary-box{
+
+    background:#F7FFFF;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    height:100%;
+
+}
+
+
+
+.summary-title{
+
+    color:#008C95;
+
+    font-weight:bold;
+
+}
+
+
+
+.info-item{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.info-label{
+
+    font-weight:bold;
+
+    color:#444;
+
+}
+
+
+
+.condition-box{
+
+    background:#E8F8F7;
+
+    border-left:6px solid #009B9B;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin-top:20px;
+
+}
+
+
+
+.completed-banner{
+
+    background:#D1FADF;
+
+    border-left:6px solid #16A34A;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.completed-banner h5{
+
+    margin:0;
+
+    color:#166534;
+
+}
+
+
+
+.completed-banner p{
+
+    margin:5px 0 0 0;
+
+    color:#166534;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5 mb-5">
+
+<div class="text-center mb-5">
+
+<i class="fa-solid fa-magnifying-glass-chart fa-4x"
+style="color:#009B9B;"></i>
+
+<h1 class="page-title mt-3">
+
+Skin Analysis Result
+
+</h1>
+
+<p class="sub-title">
+
+Personalized skincare recommendation generated from facial skin analysis
+
+</p>
+
+</div>
+
+
+
+<div class="completed-banner">
+
+<h5>
+
+<i class="fa-solid fa-circle-check"></i>
+
+Analysis Completed Successfully
+
+</h5>
+
+<p>
+
+Your skin condition has been identified using
+Computer Vision feature extraction and Rule-Based analysis.
+
+</p>
+
+</div>
+
+
+
+<div class="row g-4">
+
+<!-- LEFT -->
+
+<div class="col-lg-5">
+
+<div class="result-card">
+
+<h3 class="summary-title mb-4">
+
+<i class="fa-solid fa-image"></i>
+
+Uploaded Facial Image
+
+</h3>
+
+<img
+
+src="{{ url_for('static', filename='uploads/' + image_path) }}"
+
+class="analysis-image"
+
+>
+
+<div class="text-center mt-3">
+
+<span class="badge bg-success">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Face Successfully Detected
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- RIGHT -->
+
+<div class="col-lg-7">
+
+<div class="summary-box">
+
+<h3 class="summary-title">
+
+<i class="fa-solid fa-chart-column"></i>
+
+Analysis Summary
+
+</h3>
+
+<hr>
+
+<div class="info-item">
+
+<div class="info-label">
+
+Skin Condition
+
+</div>
+
+<h3>
+
+{{ condition }}
+
+</h3>
+
+</div>
+
+
+
+<div class="info-item">
+
+<div class="info-label">
+
+Severity
+
+</div>
+
+{% if severity=="High" %}
+
+<span class="badge bg-danger fs-6">
+
+High
+
+</span>
+
+{% elif severity=="Medium" %}
+
+<span class="badge bg-warning text-dark fs-6">
+
+Medium
+
+</span>
+
+{% else %}
+
+<span class="badge bg-success fs-6">
+
+Low
+
+</span>
+
+{% endif %}
+
+</div>
+
+
+
+<div class="condition-box">
+
+<h5>
+
+<i class="fa-solid fa-circle-info"></i>
+
+Rule-Based Recommendation Status
+
+</h5>
+
+<p class="mb-0">
+
+The extracted skin features matched a predefined skincare rule successfully.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- FEATURE EXTRACTION -->
+<!-- ================================================= -->
+
+<div class="row mt-4">
+
+    <div class="col-12">
+
+        <div class="result-card">
+
+            <h3 class="summary-title">
+
+                <i class="fa-solid fa-microchip"></i>
+
+                Feature Extraction Result
+
+            </h3>
+
+            <hr>
+
+            <p class="text-muted">
+
+                The system extracted three skin characteristics from the uploaded facial image
+                using computer vision techniques before applying the rule-based recommendation engine.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="row mt-4">
+
+    <!-- Brightness -->
+
+    <div class="col-lg-4 col-md-6 mb-4">
+
+        <div class="result-card text-center">
+
+            <i class="fa-solid fa-sun fa-3x text-warning mb-3"></i>
+
+            <h4>
+
+                Brightness
+
+            </h4>
+
+            <h2>
+
+                {{ brightness }}
+
+            </h2>
+
+           <div class="progress mt-3">
+                <div
+                class="progress-bar bg-warning"
+                role="progressbar"
+                style="width: {{ brightness_percent }}%;">
+
+                {{ brightness_percent }}%
+
+         </div>
+
+</div>
+
+            <p class="mt-3 text-muted">
+
+                Measures overall facial brightness level.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Redness -->
+
+      <div class="col-lg-4 col-md-6 mb-4">
+
+        <div class="result-card text-center">
+
+            <i class="fa-solid fa-heart fa-3x text-danger mb-3"></i>
+
+            <h4>
+
+                Redness
+
+            </h4>
+
+            <h2>
+
+                {{ redness }}
+
+            </h2>
+<div class="progress mt-3">
+    <div
+        class="progress-bar bg-danger"
+        role="progressbar"
+        style="width: {{ redness_percent }}%;">
+
+        {{ redness_percent }}%
+
+    </div>
+</div>
+
+            <p class="mt-3 text-muted">
+
+                Detects facial redness and possible irritation.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Texture -->
+
+     <div class="col-lg-4 col-md-6 mb-4">
+
+        <div class="result-card text-center">
+
+            <i class="fa-solid fa-layer-group fa-3x text-info mb-3"></i>
+
+            <h4>
+
+                Texture
+
+            </h4>
+
+            <h2>
+
+                {{ texture }}
+
+            </h2>
+
+            <div class="progress mt-3">
+
+    <div
+        class="progress-bar bg-info"
+        role="progressbar"
+        style="width: {{ (texture / 255 * 100)|round(1) }}%;">
+
+        {{ (texture / 255 * 100)|round(0) }}%
+
+    </div>
+
+</div>
+
+            <p class="mt-3 text-muted">
+
+                Measures skin surface smoothness and texture variation.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- ================================================= -->
+<!-- SYSTEM PROCESS -->
+<!-- ================================================= -->
+
+<div class="result-card mt-4">
+
+    <h3 class="summary-title">
+
+        <i class="fa-solid fa-gears"></i>
+
+        System Processing Workflow
+
+    </h3>
+
+    <hr>
+
+    <div class="row text-center">
+
+        <div class="col">
+
+            📷
+
+            <h6 class="mt-2">
+
+                Upload Image
+
+            </h6>
+
+        </div>
+
+        <div class="col">
+
+            🔍
+
+            <h6 class="mt-2">
+
+                Feature Extraction
+
+            </h6>
+
+        </div>
+
+        <div class="col">
+
+            ⚙️
+
+            <h6 class="mt-2">
+
+                Rule Matching
+
+            </h6>
+
+        </div>
+
+        <div class="col">
+
+            🧴
+
+            <h6 class="mt-2">
+
+                Recommendation
+
+            </h6>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- PERSONALIZED SKINCARE ROUTINE -->
+<!-- ================================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mb-5">
+
+    <div class="card-body p-4">
+
+        <h2 class="products-title text-center">
+
+            <i class="fa-solid fa-spa"></i>
+
+            Personalized Skincare Routine
+
+        </h2>
+
+        <p class="text-center text-muted">
+
+            Follow the recommended skincare routine based on your skin analysis.
+
+        </p>
+
+        <hr>
+
+        <!-- ================= MORNING ================= -->
+
+        <h3 class="mb-4">
+
+            🌞 Morning Routine
+
+        </h3>
+
+        <div class="row g-4">
+
+        {% set morning = [
+
+        ('1','Cleanser',cleanser),
+
+        ('2','Toner',toner),
+
+        ('3','Serum',serum),
+
+        ('4','Moisturizer',moisturizer),
+
+        ('5','Sunscreen',sunscreen)
+
+        ] %}
+
+        {% for step,title,item in morning %}
+
+        {% if item %}
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card border-0 shadow h-100 rounded-4">
+
+                <img
+
+                src="{{ url_for('static', filename='uploads/' + item['image']) }}"
+
+                class="card-img-top"
+
+                style="height:250px;object-fit:cover;">
+
+                <div class="card-body">
+
+                    <span class="badge bg-success">
+
+                        Step {{ step }}
+
+                    </span>
+
+                    <span class="badge bg-info ms-2">
+
+                        {{ title }}
+
+                    </span>
+
+                    <h4 class="mt-3">
+
+                        {{ item['product_name'] }}
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        {{ item['description'] }}
+
+                    </p>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>Benefits</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ item['benefits'] }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Ingredients</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ item['ingredients'] }}
+
+                    </p>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+
+                        <span class="fw-bold text-success">
+
+                            RM {{ item['price'] }}
+
+                        </span>
+
+                        <span class="badge bg-warning text-dark">
+
+                            Morning
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+        </div>
+
+
+
+
+
+        <hr class="my-5">
+
+
+
+
+        <!-- ================= NIGHT ================= -->
+
+        <h3 class="mb-4">
+
+            🌙 Night Routine
+
+        </h3>
+
+        <div class="row g-4">
+
+        {% set night = [
+
+        ('1','Cleanser',cleanser),
+
+        ('2','Toner',toner),
+
+        ('3','Serum',serum),
+
+        ('4','Moisturizer',moisturizer)
+
+        ] %}
+
+        {% for step,title,item in night %}
+
+        {% if item %}
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow h-100 rounded-4">
+
+                <img
+
+                src="{{ url_for('static', filename='uploads/' + item['image']) }}"
+
+                class="card-img-top"
+
+                style="height:220px;object-fit:cover;">
+
+                <div class="card-body">
+
+                    <span class="badge bg-primary">
+
+                        Step {{ step }}
+
+                    </span>
+
+                    <span class="badge bg-secondary ms-2">
+
+                        {{ title }}
+
+                    </span>
+
+                    <h5 class="mt-3">
+
+                        {{ item['product_name'] }}
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        {{ item['description'] }}
+
+                    </p>
+
+                    <hr>
+
+                    <strong>How To Use</strong>
+
+                    <p>
+
+                        {{ item['how_to_use'] }}
+
+                    </p>
+
+                    <div class="d-flex justify-content-between mt-3">
+
+                        <span class="fw-bold text-success">
+
+                            RM {{ item['price'] }}
+
+                        </span>
+
+                        <span class="badge bg-dark">
+
+                            Night
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ADVICE CARD -->
+
+<div class="card shadow-lg border-0 rounded-4 mb-4">
+
+    <div class="card-body p-4">
+
+        <h3 class="rules-title">
+
+            <i class="fa-solid fa-lightbulb"></i>
+
+            Skin Care Advice
+
+        </h3>
+
+        <hr>
+
+        <p class="fs-5">
+
+            {{ advice }}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="text-center">
+
+    <a href="/upload"
+       class="btn btn-watson btn-lg me-2">
+
+        <i class="fa-solid fa-camera"></i>
+
+        Analyze Again
+
+    </a>
+
+    <a href="/download_report"
+       class="btn btn-product-add btn-lg me-2">
+
+        <i class="fa-solid fa-file-pdf"></i>
+
+        Download Report
+
+    </a>
+
+    <a href="/dashboard"
+       class="btn btn-outline-dark btn-lg">
+
+        <i class="fa-solid fa-house"></i>
+
+        Dashboard
+
+    </a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

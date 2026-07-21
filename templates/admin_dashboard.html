@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <style>
+
+
+.chart-container {
+
+    width: 350px;
+
+    height: 350px;
+
+    margin: auto;
+
+}
+
+
+
+#skinChart {
+
+    width: 350px !important;
+
+    height: 350px !important;
+
+}
+
+/* CHART SPACE */
+
+.analytics-card {
+
+    margin-bottom: 60px;
+
+}
+
+
+/* ADMIN STATISTIC CARDS */
+
+.stat-card {
+
+    background: linear-gradient(
+        135deg,
+        #d9fff8,
+        #ffffff
+);
+
+    border-radius: 25px;
+
+
+    border: none;
+
+    min-height: 220px;
+
+    justify-content: center;
+
+    transition: 0.3s;
+
+
+    min-height: 220px;
+
+}
+
+
+
+.stat-card:hover {
+
+    transform: translateY(-8px);
+
+
+    box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+
+}
+
+
+
+.stat-card i {
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.stat-card h2 {
+
+    font-size: 45px;
+
+    font-weight: bold;
+
+    color: #009688;
+
+    margin-top: 10px;
+
+}
+
+
+.stat-card p {
+
+    font-size: 18px;
+
+    color: #333333;
+
+    font-weight: 500;
+
+}
+
+
+</style>
+
+</head>
+
+
+
+<body class="admin-dashboard">
+
+
+<div class="container mt-5 mb-5">
+
+
+
+<!-- HEADER -->
+
+
+<div class="text-center mb-5">
+
+
+    <h1 class="page-title">
+
+        <i class="fa-solid fa-user-shield"></i>
+
+        Admin Dashboard
+
+    </h1>
+
+
+    <p class="text-muted">
+
+        Manage Watson Beauty Advisory System
+
+    </p>
+
+
+</div>
+
+
+
+
+<!-- STATISTICS CARDS -->
+
+
+<div class="row">
+
+<!-- ANALYTICS CHART -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-5 analytics-card">
+
+
+<div class="card-body">
+
+
+<h2 class="text-center">
+
+📊 Skin Condition Analytics
+
+</h2>
+
+
+<hr>
+
+
+<div class="chart-container">
+
+    <canvas id="skinChart"></canvas>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- CUSTOMERS -->
+
+
+<div class="col-md-3 mb-4">
+
+<div class="card shadow stat-card text-center">
+
+
+
+<div class="card-body">
+
+
+<i class="fa-solid fa-users fa-3x text-primary mb-3"></i>
+
+
+<h2>
+
+{{ total_users }}
+
+</h2>
+
+
+<p>
+
+Total Customers
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- WORKERS -->
+
+
+<div class="col-md-3 mb-4">
+
+
+<div class="card shadow stat-card text-center">
+
+<div class="card-body">
+
+
+<i class="fa-solid fa-user-tie fa-3x text-success mb-3"></i>
+
+
+<h2>
+
+{{ total_workers }}
+
+</h2>
+
+
+<p>
+
+Watson Workers
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- PRODUCTS -->
+
+
+<div class="col-md-3 mb-4">
+
+
+<div class="card shadow stat-card text-center">
+
+
+<div class="card-body">
+
+
+<i class="fa-solid fa-bottle-droplet fa-3x text-warning mb-3"></i>
+
+
+<h2>
+
+{{ total_products }}
+
+</h2>
+
+
+<p>
+
+Products
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ANALYSIS -->
+
+
+<!-- ANALYSIS -->
+
+
+<div class="col-md-3 mb-4">
+
+
+    <div class="card shadow stat-card text-center">
+
+
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+
+
+            <i class="fa-solid fa-chart-line fa-3x text-danger mb-3"></i>
+
+
+
+            <h2>
+
+                {{ total_analysis }}
+
+            </h2>
+
+
+
+            <p>
+
+                Skin Analysis
+
+            </p>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- SKIN STATISTICS -->
+
+
+<div class="card shadow-lg border-0 rounded-4 mt-5">
+
+
+<div class="card-body p-4">
+
+
+<h2 class="page-title">
+
+
+<i class="fa-solid fa-chart-pie"></i>
+
+Skin Condition Statistics
+
+
+</h2>
+
+
+
+<hr>
+
+
+
+{% if skin_stats %}
+
+
+
+{% for stat in skin_stats %}
+
+
+
+<h5>
+
+{{ stat['condition'] }}
+
+</h5>
+
+
+
+<div class="progress mb-4"
+style="height:30px;">
+
+
+
+<div 
+class="progress-bar"
+data-width="{{ stat['total'] * 20 }}">
+
+
+{{ stat['total'] }} Analysis
+
+
+</div>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+
+<p class="text-muted">
+
+
+No analysis data available yet.
+
+
+</p>
+
+
+
+{% endif %}
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ADMIN ACTIONS -->
+
+
+<div class="card shadow-lg border-0 rounded-4 mt-5">
+
+
+<div class="card-body text-center">
+
+
+<h2 class="page-title">
+
+Admin Actions
+
+</h2>
+
+
+<hr>
+
+
+
+
+<a href="/admin/add_worker"
+class="btn btn-success btn-lg m-2">
+
+
+<i class="fa-solid fa-user-plus"></i>
+
+
+Create Worker Account
+
+
+</a>
+
+
+
+
+
+<a href="/admin/users"
+class="btn btn-primary btn-lg m-2">
+
+
+<i class="fa-solid fa-users"></i>
+
+
+View Users
+
+
+</a>
+
+<a href="/admin/analysis_history"
+   class="btn btn-primary">
+
+    <i class="fa-solid fa-chart-line"></i>
+
+    View User Analysis
+
+</a>
+
+
+
+
+
+<a href="/logout"
+class="btn btn-danger btn-lg m-2">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+
+Logout
+
+
+</a>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+<script>
+
+document.querySelectorAll(".progress-bar").forEach(function(bar){
+
+    bar.style.width = bar.dataset.width + "%";
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+
+    var chartLabels = JSON.parse(
+        '{{ chart_labels | tojson | safe }}'
+    );
+
+
+    var chartValues = JSON.parse(
+        '{{ chart_values | tojson | safe }}'
+    );
+
+
+
+    var ctx = document.getElementById(
+        "skinChart"
+    );
+
+
+new Chart(
+
+ctx,
+
+{
+
+    type: "pie",
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
+
+    },
+
+
+    data: {
+
+
+                labels: chartLabels,
+
+
+                datasets: [
+
+                    {
+
+                        label: "Skin Condition Analysis",
+
+                        data: chartValues
+
+                    }
+
+                ]
+
+            }
+
+        }
+
+    );
+
+
+</script>
+
+</body>
+
+
+
+</html>

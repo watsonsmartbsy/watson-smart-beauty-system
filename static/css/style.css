@@ -1,0 +1,708 @@
+/* =====================================
+   WATSONS STORE THEME
+===================================== */
+
+:root{
+
+    --watsons-primary:#008B8F;
+
+    --watsons-dark:#006D70;
+
+    --watsons-light:#EAF7F7;
+
+    --watsons-accent:#E53E30;
+
+    --watsons-white:#FFFFFF;
+
+}
+
+/* BODY */
+
+body{
+
+    background:
+    linear-gradient(
+        135deg,
+        #297a7a,
+        #FFFFFF
+    );
+
+    min-height:100vh;
+
+}
+
+/* TITLES */
+
+.page-title{
+
+    color:var(--watsons-primary);
+
+    font-weight:bold;
+
+}
+
+/* CARDS */
+
+.dashboard-card{
+
+    background:rgba(255,255,255,.93);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:20px;
+
+    transition:.3s;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+
+}
+
+.dashboard-card{
+
+    background:rgba(255,255,255,0.90);
+
+    backdrop-filter:blur(10px);
+
+    border:none;
+
+    border-radius:20px;
+
+}
+
+/* ICONS */
+
+.icon{
+
+    color:var(--watsons-primary);
+
+    font-size:50px;
+
+}
+
+/* BUTTONS */
+.btn-watson{
+
+    background:var(--watsons-primary);
+
+    color:white;
+
+    border:none;
+
+    font-weight:600;
+
+}
+
+.btn-watson:hover{
+
+    background:var(--watsons-dark);
+
+    color:white;
+
+}
+
+/* SUCCESS BADGES */
+
+.badge-watson{
+
+    background:var(--watsons-green);
+
+}
+
+/* TABLES */
+
+.table thead{
+
+    background:var(--watsons-green);
+
+    color:white;
+
+}
+
+/* HEADER SECTIONS */
+
+.welcome-card{
+
+    background:white;
+
+    border:none;
+
+    border-radius:25px;
+
+}
+
+/* STATISTICS CARD */
+
+.stat-card{
+
+    background:rgba(255,255,255,0.90);
+
+    backdrop-filter:blur(10px);
+
+    border:none;
+
+    border-radius:20px;
+
+}
+
+/* FORM FOCUS */
+
+.form-control:focus{
+
+    border-color:var(--watsons-green);
+
+    box-shadow:
+    0 0 0 0.2rem rgba(0,166,81,0.25);
+
+}
+
+/* CUSTOM HR */
+
+hr{
+
+    border-top:2px solid #d6f5e4;
+
+}
+
+.table th{
+
+    padding:18px;
+
+    font-size:20px;
+
+}
+
+.table td{
+
+    padding:18px;
+
+    vertical-align:middle;
+
+}
+
+.table{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+/* ANALYSES */
+
+.main-card{
+
+    background:rgba(255,255,255,0.92);
+
+    backdrop-filter:blur(10px);
+
+    border:none;
+
+    border-radius:20px;
+
+}
+
+/* PRODUCTS */
+
+.products-card{
+
+    background:linear-gradient(
+        135deg,
+        #F9A825,
+        #FFB300
+    );
+
+    color:white;
+
+    border:none;
+
+}
+
+/* RULES */
+
+.rules-card{
+
+    background:linear-gradient(
+        135deg,
+        #7E57C2,
+        #9575CD
+    );
+
+    color:white;
+
+    border:none;
+
+}
+
+.icon-circle{
+
+    width:80px;
+
+    height:80px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:20px;
+
+}
+
+/* PRODUCT PAGE */
+
+.products-title{
+
+    color:#F9A825;
+
+    font-weight:700;
+
+}
+
+.product-card{
+
+    border:none;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.product-image{
+
+    height:250px;
+
+    object-fit:cover;
+
+}
+
+.product-category{
+
+    background:#F9A825;
+
+    color:white;
+
+    font-size:14px;
+
+}
+
+.product-price{
+
+    color:#F57C00;
+
+    font-weight:bold;
+
+}
+
+.btn-product-add{
+
+    background:#F9A825;
+
+    color:white;
+
+    border:none;
+
+}
+
+.btn-product-add:hover{
+
+    background:#F57C00;
+
+    color:white;
+
+}
+
+.btn-product-delete{
+
+    background:#E65100;
+
+    color:white;
+
+    border:none;
+
+}
+
+.btn-product-delete:hover{
+
+    background:#BF360C;
+
+    color:white;
+
+}
+
+.rule-card{
+
+    border:none;
+
+    border-radius:20px;
+
+    transition:.3s;
+
+}
+
+.rule-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.rules-title{
+
+    color:#7E57C2;
+
+    font-weight:700;
+
+    font-size:3rem;
+
+}
+
+.btn-rule-add{
+
+    background:linear-gradient(
+        135deg,
+        #7E57C2,
+        #9575CD
+    );
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px 28px;
+
+    font-weight:600;
+
+}
+
+.btn-rule-add:hover{
+
+    background:linear-gradient(
+        135deg,
+        #673AB7,
+        #7E57C2
+    );
+
+    color:white;
+
+}
+
+.rule-card{
+
+    border:none;
+
+    border-radius:20px;
+
+    background:white;
+
+    transition:.3s;
+
+}
+
+.rule-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 10px 25px rgba(126,87,194,.20);
+
+}
+.btn-rule-edit{
+
+    background:#9575CD;
+
+    color:white;
+
+    border:none;
+
+}
+
+.btn-rule-edit:hover{
+
+    background:#7E57C2;
+
+    color:white;
+
+}
+
+.btn-rule-delete{
+
+    background:#5E35B1;
+
+    color:white;
+
+    border:none;
+
+}
+
+.btn-rule-delete:hover{
+
+    background:#4527A0;
+
+    color:white;
+
+}
+
+.rules-title{
+
+    color:#7E57C2;
+
+    font-weight:700;
+
+}
+
+.btn-rule-add{
+
+    background:#7E57C2;
+
+    color:white;
+
+    border:none;
+
+}
+
+.btn-rule-add:hover{
+
+    background:#673AB7;
+
+    color:white;
+
+}
+
+/* RESULT PAGE */
+
+.result-product-image{
+
+    width:250px;
+
+    height:250px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    border:4px solid #f3f3f3;
+
+}
+
+/* ============================= */
+/* Worker Dashboard Background   */
+/* ============================= */
+
+.worker-dashboard{
+
+    background-image: url("../image/worker_bg.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+}
+
+/* ============================= */
+/* User Dashboard Background     */
+/* ============================= */
+
+.user-dashboard{
+
+    background-image: url("../image/user_bg.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+
+}
+
+
+.profile-avatar{
+
+    width:140px;
+
+    height:140px;
+
+    background:linear-gradient(135deg,#00b3b3,#008b8b);
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+.profile-avatar i{
+
+    color:white;
+/* ========================= */
+/* Profile Avatar            */
+/* ========================= */
+
+.profile-avatar{
+
+    width:140px;
+
+    height:140px;
+
+    background:linear-gradient(135deg,#00b3b3,#008b8b);
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+.profile-avatar i{
+
+    color:white;
+
+    font-size:70px;
+
+}
+
+/* ========================= */
+/* Profile Information Box   */
+/* ========================= */
+
+.info-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:#f8f9fa;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    margin-bottom:18px;
+
+    transition:.3s;
+
+}
+
+.info-box:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.info-box i{
+
+    font-size:30px;
+
+    color:#009b9b;
+
+    width:40px;
+
+    text-align:center;
+
+}
+    font-size:70px;
+
+}
+
+/* ============================= */
+/* Admin Dashboard Background    */
+/* ============================= */
+.admin-dashboard{
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.40),
+            rgba(255,255,255,0.40)
+        ),
+        url("../image/admin_bg.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    min-height: 100vh;
+
+}
+
+.table-hover tbody tr{
+
+    transition:0.3s;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:#eef9f9;
+
+    transform:scale(1.01);
+
+}
+
+.worker_dashboard{
+
+    background: linear-gradient(
+        135deg,
+        #0f8f91,
+        #8fd3d4
+    );
+
+    min-height:100vh;
+
+    background-attachment:fixed;
+
+}
