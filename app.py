@@ -892,62 +892,12 @@ conn.close()
     # SKINCARE ROUTINE PRODUCTS
     # =========================
 
-    conn = get_db()
-    cur = conn.cursor()
-
-    # Morning Routine
-
-    cur.execute("""
-        SELECT *
-        FROM products
-        WHERE skin_type=%s
-        AND category='Cleanser'
-        LIMIT 1
-    """, (condition,))
-    cleanser = cur.fetchone()
-
-    cur.execute("""
-        SELECT *
-        FROM products
-        WHERE skin_type=%s
-        AND category='Toner'
-        LIMIT 1
-    """, (condition,))
-    toner = cur.fetchone()
-
-    cur.execute("""
-        SELECT *
-        FROM products
-        WHERE skin_type=%s
-        AND category='Moisturizer'
-        LIMIT 1
-    """, (condition,))
-    moisturizer = cur.fetchone()
-
-    cur.execute("""
-        SELECT *
-        FROM products
-        WHERE skin_type=%s
-        AND category='Serum'
-        LIMIT 1
-    """, (condition,))
-    serum = cur.fetchone()
-
-    cur.execute("""
-        SELECT *
-        FROM products
-        WHERE skin_type=%s
-        AND category='Sunscreen'
-        LIMIT 1
-    """, (condition,))
-    sunscreen = cur.fetchone()
-
-    cur.close()
+        cur.close()
     conn.close()
 
-  brightness_percent = round(brightness / 255 * 100, 1)
-redness_percent = round(redness / 255 * 100, 1)
-texture_percent = round(texture / 255 * 100, 1)
+    brightness_percent = round(brightness / 255 * 100, 1)
+    redness_percent = round(redness / 255 * 100, 1)
+    texture_percent = round(texture / 255 * 100, 1)
 
     print("Filename =", filename)
     print("Passing image_path =", filename)
@@ -975,7 +925,6 @@ texture_percent = round(texture / 255 * 100, 1)
 
         image_path=filename
     )
-
 
 # -------------------------
 # ANALYSIS HISTORY
