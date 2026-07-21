@@ -753,6 +753,11 @@ def upload_image():
     # ANALYZE IMAGE
     result = analyze_skin(filepath)
 
+    # Convert NumPy values to normal Python floats
+    brightness = float(result['brightness'])
+    redness = float(result['redness'])
+    texture = float(result['texture'])
+
     # FACE NOT DETECTED
     if 'error' in result:
         return result['error']
@@ -762,11 +767,11 @@ def upload_image():
 
     # RULE ENGINE
     rule_result = skin_condition(
-        result['brightness'],
-        result['redness'],
-        result['texture'],
-        conn
-    )
+    brightness,
+    redness,
+    texture,
+    conn
+)
 
     condition = rule_result['condition']
     advice = rule_result['advice']
@@ -866,17 +871,17 @@ def upload_image():
             %s,%s,%s,%s,%s,%s,%s,%s,%s
         )
     """,
-    (
-        session['user_id'],
-        filepath,
-        result['brightness'],
-        result['redness'],
-        result['texture'],
-        condition,
-        product_name,
-        advice,
-        severity
-    ))
+  (
+    session['user_id'],
+    filepath,
+    brightness,
+    redness,
+    texture,
+    condition,
+    product_name,
+    advice,
+    severity
+)
 
     conn.commit()
 
@@ -940,9 +945,9 @@ def upload_image():
     cur.close()
     conn.close()
 
-    brightness_percent = round(result['brightness'] / 255 * 100, 1)
-    redness_percent = round(result['redness'] / 255 * 100, 1)
-    texture_percent = round(result['texture'] / 255 * 100, 1)
+  brightness_percent = round(brightness / 255 * 100, 1)
+redness_percent = round(redness / 255 * 100, 1)
+texture_percent = round(texture / 255 * 100, 1)
 
     print("Filename =", filename)
     print("Passing image_path =", filename)
@@ -950,9 +955,9 @@ def upload_image():
     return render_template(
         "result.html",
 
-        brightness=result['brightness'],
-        redness=result['redness'],
-        texture=result['texture'],
+        brightness=brightness,
+        redness=redness,
+        texture=texture,
 
         brightness_percent=brightness_percent,
         redness_percent=redness_percent,
