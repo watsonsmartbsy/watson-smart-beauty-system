@@ -852,26 +852,26 @@ def upload_image():
         product_price = recommendation['price']
         product_image = recommendation['image']
 
-    # SAVE HISTORY
-    cur.execute("""
-        INSERT INTO analysis_history
-        (
-            user_id,
-            image_path,
-            brightness,
-            redness,
-            texture,
-            condition,
-            product,
-            advice,
-            severity
-        )
-        VALUES
-        (
-            %s,%s,%s,%s,%s,%s,%s,%s,%s
-        )
-    """),
-  (
+   # SAVE HISTORY
+cur.execute("""
+    INSERT INTO analysis_history
+    (
+        user_id,
+        image_path,
+        brightness,
+        redness,
+        texture,
+        condition,
+        product,
+        advice,
+        severity
+    )
+    VALUES
+    (
+        %s,%s,%s,%s,%s,%s,%s,%s,%s
+    )
+""",
+(
     session['user_id'],
     filepath,
     brightness,
@@ -881,12 +881,12 @@ def upload_image():
     product_name,
     advice,
     severity
-),
+))
 
-    conn.commit()
+conn.commit()
 
-    cur.close()
-    conn.close()
+cur.close()
+conn.close()
 
     # =========================
     # SKINCARE ROUTINE PRODUCTS
