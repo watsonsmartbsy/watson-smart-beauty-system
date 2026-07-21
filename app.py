@@ -752,17 +752,18 @@ def upload_image():
 
     # ANALYZE IMAGE
     result = analyze_skin(filepath)
+    
     print(result)
     print(type(result))
-
+    
+    # FACE NOT DETECTED
+    if 'error' in result:
+        return result['error']
+    
     # Convert NumPy values to normal Python floats
     brightness = float(result['brightness'])
     redness = float(result['redness'])
     texture = float(result['texture'])
-
-    # FACE NOT DETECTED
-    if 'error' in result:
-        return result['error']
 
     conn = get_db()
     cur = conn.cursor()
