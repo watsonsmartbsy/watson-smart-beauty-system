@@ -899,34 +899,90 @@ def upload_image():
     # SKINCARE ROUTINE PRODUCTS
     # =========================
 
+    conn = get_db()
+    cur = conn.cursor()
+    
+    # Cleanser
+    cur.execute("""
+        SELECT *
+        FROM products
+        WHERE skin_type=%s
+        AND category='Cleanser'
+        LIMIT 1
+    """, (condition,))
+    cleanser = cur.fetchone()
+    
+    # Toner
+    cur.execute("""
+        SELECT *
+        FROM products
+        WHERE skin_type=%s
+        AND category='Toner'
+        LIMIT 1
+    """, (condition,))
+    toner = cur.fetchone()
+    
+    # Serum
+    cur.execute("""
+        SELECT *
+        FROM products
+        WHERE skin_type=%s
+        AND category='Serum'
+        LIMIT 1
+    """, (condition,))
+    serum = cur.fetchone()
+    
+    # Moisturizer
+    cur.execute("""
+        SELECT *
+        FROM products
+        WHERE skin_type=%s
+        AND category='Moisturizer'
+        LIMIT 1
+    """, (condition,))
+    moisturizer = cur.fetchone()
+    
+    # Sunscreen
+    cur.execute("""
+        SELECT *
+        FROM products
+        WHERE skin_type=%s
+        AND category='Sunscreen'
+        LIMIT 1
+    """, (condition,))
+    sunscreen = cur.fetchone()
+    
+    cur.close()
+    conn.close()
+    
     brightness_percent = round(brightness / 255 * 100, 1)
     redness_percent = round(redness / 255 * 100, 1)
     texture_percent = round(texture / 255 * 100, 1)
-
+    
     print("Filename =", filename)
     print("Passing image_path =", filename)
-
+    
     return render_template(
         "result.html",
-
+    
         brightness=brightness,
         redness=redness,
         texture=texture,
-
+    
         brightness_percent=brightness_percent,
         redness_percent=redness_percent,
         texture_percent=texture_percent,
-
+    
         condition=condition,
         advice=advice,
         severity=severity,
-
+    
         cleanser=cleanser,
         toner=toner,
         serum=serum,
         moisturizer=moisturizer,
         sunscreen=sunscreen,
-
+    
         image_path=filename
     )
 
