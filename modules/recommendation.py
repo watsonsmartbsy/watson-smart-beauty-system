@@ -7,28 +7,37 @@ def get_recommendation(condition, severity, conn):
     print("Severity:", severity)
     print("Conn:", conn)
 
+    cur = conn.cursor()
+
     if severity == "High":
 
-        product = conn.execute(
-            '''
-            SELECT * FROM products
-            WHERE skin_type = ?
+        cur.execute(
+            """
+            SELECT *
+            FROM products
+            WHERE skin_type = %s
             ORDER BY price DESC
             LIMIT 1
-            ''',
+            """,
             (condition,)
-        ).fetchone()
+        )
 
     else:
 
-        product = conn.execute(
-            '''
-            SELECT * FROM products
-            WHERE skin_type = ?
+        cur.execute(
+            """
+            SELECT *
+            FROM products
+            WHERE skin_type = %s
             ORDER BY price ASC
             LIMIT 1
-            ''',
+            """,
             (condition,)
-        ).fetchone()
+        )
 
+    product = cur.fetchone()
+
+    cur.close()
+
+    return product
     return product
