@@ -36,17 +36,15 @@ app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
 # -------------------------
 # DATABASE CONNECTION
 # -------------------------
-import sqlite3
 import os
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 def get_db():
-    db_path = os.path.abspath("database.db")
-
-    print("DATABASE:", db_path)
-
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-
+    conn = psycopg2.connect(
+        os.environ["DATABASE_URL"],
+        cursor_factory=RealDictCursor
+    )
     return conn
 
 # -------------------------
