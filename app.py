@@ -853,11 +853,11 @@ def upload_image():
         product_image = recommendation['image']
 
    # SAVE HISTORY
-print(type(brightness), brightness)
-print(type(redness), redness)
-print(type(texture), texture)
+    print(type(brightness), brightness)
+    print(type(redness), redness)
+    print(type(texture), texture)
 
-cur.execute("""
+    cur.execute("""
     INSERT INTO analysis_history
     (
         user_id,
@@ -887,17 +887,14 @@ cur.execute("""
     severity
 ))
 
-conn.commit()
-
-cur.close()
-conn.close()
+    conn.commit()
+    
+    cur.close()
+    conn.close()
 
     # =========================
     # SKINCARE ROUTINE PRODUCTS
     # =========================
-
-        cur.close()
-    conn.close()
 
     brightness_percent = round(brightness / 255 * 100, 1)
     redness_percent = round(redness / 255 * 100, 1)
