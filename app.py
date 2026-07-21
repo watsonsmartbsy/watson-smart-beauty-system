@@ -881,7 +881,7 @@ def upload_image():
     product_name,
     advice,
     severity
-)
+),
 
     conn.commit()
 
